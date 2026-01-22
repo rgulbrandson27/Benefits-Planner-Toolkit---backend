@@ -23,6 +23,9 @@ public class Scenario {
     @Column(columnDefinition = "TEXT")
     private String workIncentivesData;
 
+    @Column(columnDefinition = "TEXT")
+    private String earningsData;    // ← JSON of EarningsData (nullable)
+
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 }

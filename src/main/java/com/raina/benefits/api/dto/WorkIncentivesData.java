@@ -1,22 +1,21 @@
 package com.raina.benefits.api.dto;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import java.util.List;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class WorkIncentivesData {
-    private List<EarningsEntry> earnings;
     private List<TWPMonth> twpMonths;
     private EPEPeriod epe;
     private CessationAndGrace cessationAndGrace;
 
     @Data
-    public static class EarningsEntry {
-        private String month;     // "MM/YYYY"
-        private String status;    // "BELOW_TWP", "ABOVE_TWP", "ABOVE_SGA"
-    }
-
-    @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class TWPMonth {
         private Integer twpNumber;  // 1-9
         private String month;       // "MM/YYYY" or null
@@ -24,12 +23,16 @@ public class WorkIncentivesData {
     }
 
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class EPEPeriod {
         private String beginMonth;  // "MM/YYYY"
         private String endMonth;    // "MM/YYYY"
     }
 
     @Data
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class CessationAndGrace {
         private String cessationMonth;
         private String graceMonth1;
