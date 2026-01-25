@@ -8,19 +8,37 @@ import java.time.LocalDate;
 @Entity
 @Table(name = "clients")
 public class Client {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;  // Database ID
+    private Long id;
 
-    private String clientIdNumber;  // 6-digit reference number (String, not int)
+    @Column(unique = true, nullable = false, length = 6)
+    private String clientIdNumber;  // 6-digit business ID
 
-    private Long organizationId;
-    private Long primaryWorkerId;
+    @Column(nullable = false)
+    private String firstName;
 
-    // Dates (same for all scenarios)
+    @Column(nullable = false)
+    private String lastName;
+
+    // Relationship - Client belongs to one Organization
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "organization_id")
+    private Organization organization;
+
+    // Relationship - Client has one primary worker (Employee)
+    @ManyToOne
+    @JoinColumn(name = "primary_worker_id")
+    private Employee primaryWorker;
+
+    // SSDI-specific dates
+    @Column(nullable = false)
     private LocalDate onsetDate;
+
     private LocalDate applicationDate;
+
+    @Column(nullable = false)
     private LocalDate entitlementDate;
+
     private LocalDate medicareStartDate;
 }
