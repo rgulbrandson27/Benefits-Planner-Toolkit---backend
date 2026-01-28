@@ -22,22 +22,21 @@ public class Client {
     private String lastName;
 
     // Relationship - Client belongs to one Organization
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "organization_id")
     private Organization organization;
 
     // Relationship - Client has one primary worker (Employee)
-    @ManyToOne
+    @ManyToOne (optional = true)
     @JoinColumn(name = "primary_worker_id")
     private Employee primaryWorker;
 
     // SSDI-specific dates
-    @Column(nullable = false)
+    @Column(nullable = true)
     private LocalDate onsetDate;
 
     private LocalDate applicationDate;
 
-    @Column(nullable = false)
     private LocalDate entitlementDate;
 
     private LocalDate medicareStartDate;
