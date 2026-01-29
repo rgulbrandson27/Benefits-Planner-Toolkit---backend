@@ -13,15 +13,16 @@ public class Scenario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // Relationship - Scenario belongs to one Client (required)
     @ManyToOne(optional = false)
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
 
-    // Relationship - Scenario created by one Employee (required)
     @ManyToOne(optional = false)
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
+
+    @Column(nullable = true)
+    private Integer chartStartYear;
 
     @Column(length = 500)
     private String description;
@@ -29,12 +30,12 @@ public class Scenario {
     @Column(length = 50)
     private String status;  // e.g., "DRAFT", "ACTIVE", "ARCHIVED"
 
-    // Complex SSDI calculation data stored as JSON
+    // Stored as JSON
     @Column(columnDefinition = "TEXT")
-    private String workIncentivesData;  // TWP months, EPE periods, etc.
+    private String workIncentivesData;
 
     @Column(columnDefinition = "TEXT")
-    private String earningsData;  // Monthly earnings array as JSON
+    private String earningsData;
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt;

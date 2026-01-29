@@ -27,9 +27,9 @@ public class Employee {
     private ProgramType programType;
 
     // Relationship - Employee belongs to one Organization
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "organization_id")
-    private Organization organization;
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "organization_id")
+//    private Organization organization;
 
     // Relationship - Employee can be primary worker for many clients
     @OneToMany(mappedBy = "primaryWorker")

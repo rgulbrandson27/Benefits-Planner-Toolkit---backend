@@ -22,9 +22,9 @@ public class Client {
     private String lastName;
 
     // Relationship - Client belongs to one Organization
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "organization_id")
-    private Organization organization;
+//    @ManyToOne(optional = true)
+//    @JoinColumn(name = "organization_id")
+//    private Organization organization;
 
     // Relationship - Client has one primary worker (Employee)
     @ManyToOne (optional = true)
