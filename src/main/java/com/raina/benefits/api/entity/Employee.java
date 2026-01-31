@@ -2,13 +2,15 @@ package com.raina.benefits.api.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employee extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,16 +28,16 @@ public class Employee {
     @Column(nullable = false)
     private ProgramType programType;
 
-    // Relationship - Employee belongs to one Organization
-//    @ManyToOne(optional = false)
-//    @JoinColumn(name = "organization_id")
-//    private Organization organization;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "organization_id", nullable = false)
+    private Organization organization;
 
     // Relationship - Employee can be primary worker for many clients
     @OneToMany(mappedBy = "primaryWorker")
-    private List<Client> primaryClients = new ArrayList<>();
+    private List<Client> assignedClients = new ArrayList<>();
 
     // Relationship - Employee can create many scenarios
     @OneToMany(mappedBy = "employee")
     private List<Scenario> createdScenarios = new ArrayList<>();
+
 }

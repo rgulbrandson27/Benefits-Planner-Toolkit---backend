@@ -27,9 +27,6 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
     List<Scenario> findByClientOrderByCreatedAtDesc(Client client);
     List<Scenario> findByClientIdOrderByCreatedAtDesc(Long clientId);
 
-    // Find scenarios created within a date range
-    List<Scenario> findByCreatedAtBetween(LocalDateTime start, LocalDateTime end);
-
     // Get the 10 most recent scenarios by a specific employee
     List<Scenario> findTop10ByEmployeeOrderByCreatedAtDesc(Employee employee);
     List<Scenario> findTop10ByEmployeeIdOrderByCreatedAtDesc(Long employeeId);

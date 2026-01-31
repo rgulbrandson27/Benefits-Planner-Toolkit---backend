@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "scenarios")
-public class Scenario {
+public class Scenario extends BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,13 +22,13 @@ public class Scenario {
     private Employee employee;
 
     @Column(nullable = true)
-    private Integer chartStartYear;
+    private Integer scenarioStartYear; // the first row in the chart of 13 total years listed
 
     @Column(length = 500)
     private String description;
 
     @Column(length = 50)
-    private String status;  // e.g., "DRAFT", "ACTIVE", "ARCHIVED"
+    private String status;  // e.g., "DRAFT", "COMPLETED", "ARCHIVED"
 
     // Stored as JSON
     @Column(columnDefinition = "TEXT")
@@ -37,20 +37,4 @@ public class Scenario {
     @Column(columnDefinition = "TEXT")
     private String earningsData;
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt;
-
-    private LocalDateTime updatedAt;
-
-    // Automatically set timestamps
-    @PrePersist
-    protected void onCreate() {
-        createdAt = LocalDateTime.now();
-        updatedAt = LocalDateTime.now();
-    }
-
-    @PreUpdate
-    protected void onUpdate() {
-        updatedAt = LocalDateTime.now();
-    }
 }

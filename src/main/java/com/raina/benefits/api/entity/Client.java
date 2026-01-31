@@ -3,17 +3,19 @@ package com.raina.benefits.api.entity;
 import lombok.Data;
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Data
 @Entity
 @Table(name = "clients")
-public class Client {
+public class Client extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    // 6-digit ID assigned by worker
     @Column(unique = true, nullable = false, length = 6)
-    private String clientIdNumber;  // 6-digit business ID
+    private String clientIdNumber;
 
     @Column(nullable = false)
     private String firstName;
@@ -21,15 +23,13 @@ public class Client {
     @Column(nullable = false)
     private String lastName;
 
-    // Relationship - Client belongs to one Organization
-//    @ManyToOne(optional = true)
-//    @JoinColumn(name = "organization_id")
-//    private Organization organization;
-
-    // Relationship - Client has one primary worker (Employee)
-    @ManyToOne (optional = true)
+    @ManyToOne(optional = true)
     @JoinColumn(name = "primary_worker_id")
     private Employee primaryWorker;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "organization_id", nullable = false)
+    private Organization organization;
 
     // SSDI-specific dates
     @Column(nullable = true)
@@ -40,4 +40,5 @@ public class Client {
     private LocalDate entitlementDate;
 
     private LocalDate medicareStartDate;
+
 }
