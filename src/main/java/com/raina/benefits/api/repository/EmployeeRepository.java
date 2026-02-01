@@ -19,8 +19,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     boolean existsByEmail(String email);
 
     // Find all employees in an organization
-    List<Employee> findByOrganization(Organization organization);
-    List<Employee> findByOrganizationId(Long organizationId);
+    //List<Employee> findByOrganization(Organization organization);
+   // List<Employee> findByOrganizationId(Long organizationId);
 
     // Find employees by program type (all WIPA counselors, all TTW specialists, etc.)
     List<Employee> findByProgramType(ProgramType programType);

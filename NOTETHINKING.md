@@ -29,6 +29,7 @@ new Date('2020-03-15').toLocaleDateString('en-US') // "3/15/2020"
 
 ### TOO FUN TO FORGET:)
 
-CLAUDE: "I genuinely "enjoy" working through these problems with you - "
+CLAUDE: "I genuinely enjoy" working through these problems with you - "
+
 
 

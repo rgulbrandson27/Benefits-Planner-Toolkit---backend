@@ -1,7 +1,7 @@
 package com.raina.benefits.api.controller;
 
 import com.raina.benefits.api.entity.Client;
-import com.raina.benefits.api.repository.ClientRepository;
+import com.raina.benefits.api.service.ClientService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -11,29 +11,77 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/clients")
-@RequiredArgsConstructor  // Add this - Lombok generates the constructor for you
+@RequiredArgsConstructor
 public class ClientController {
 
-    private final ClientRepository clientRepository;  // Remove @Autowired, add final
+    private final ClientService clientService;  // Changed from ClientRepository
 
     @PostMapping
     public Client createClient(@RequestBody Client client) {
-        if (clientRepository.existsByClientIdNumber(client.getClientIdNumber())) {
+        if (clientService.orgAssignedIdExists(client.getOrgAssignedId())) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
                     "Client ID already exists");
         }
-        return clientRepository.save(client);
+        return clientService.saveClient(client);
     }
 
     @GetMapping
     public List<Client> getAllClients() {
-        return clientRepository.findAll();
+        return clientService.getAllClients();
     }
 
     @GetMapping("/{id}")
     public Client getClientById(@PathVariable Long id) {
-        return clientRepository.findById(id)
+        return clientService.getClientById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                         "Client not found"));
+    }
+
+    // Get client by organization-assigned ID
+    @GetMapping("/org-id/{orgAssignedId}")
+    public Client getClientByOrgAssignedId(@PathVariable String orgAssignedId) {
+        return clientService.getClientByOrgAssignedId(orgAssignedId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
+                        "Client not found"));
+    }
+
+    // Get clients by primary worker ID
+    @GetMapping("/primary-worker/{workerId}")
+    public List<Client> getClientsByPrimaryWorker(@PathVariable Long workerId) {
+        return clientService.getClientsByPrimaryWorkerId(workerId);
+    }
+
+    // Search clients by last name
+    @GetMapping("/search/last-name")
+    public List<Client> searchByLastName(@RequestParam String lastName) {
+        return clientService.searchByLastName(lastName);
+    }
+
+    // Search clients by full name
+    @GetMapping("/search/full-name")
+    public List<Client> searchByFullName(
+            @RequestParam String firstName,
+            @RequestParam String lastName) {
+        return clientService.searchByFullName(firstName, lastName);
+    }
+
+    // Update a client
+    @PutMapping("/{id}")
+    public Client updateClient(@PathVariable Long id, @RequestBody Client client) {
+        if (!clientService.clientExists(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
+        }
+        client.setId(id);
+        return clientService.saveClient(client);
+    }
+
+    // Delete a client
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteClient(@PathVariable Long id) {
+        if (!clientService.clientExists(id)) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
+        }
+        clientService.deleteClient(id);
     }
 }

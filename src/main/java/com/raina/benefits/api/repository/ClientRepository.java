@@ -13,14 +13,14 @@ import java.util.Optional;
 public interface ClientRepository extends JpaRepository<Client, Long> {
 
     // Find by 6-digit client assigned ID
-    Optional<Client> findByClientIdNumber(String clientIdNumber);
+    Optional<Client> findByOrgAssignedId(String orgAssignedId);
 
     // Check if client ID number already exists (for validation)
-    boolean existsByClientIdNumber(String clientIdNumber);
+    boolean existsByOrgAssignedId(String clientIdNumber);
 
     // Find all clients for an organization
-    List<Client> findByOrganization(Organization organization);
-    List<Client> findByOrganizationId(Long organizationId);
+    //List<Client> findByOrganization(Organization organization);
+    //List<Client> findByOrganizationId(Long organizationId);
 
     // Find all clients for a specific primary worker
     List<Client> findByPrimaryWorker(Employee employee);

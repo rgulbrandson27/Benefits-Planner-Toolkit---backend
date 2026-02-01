@@ -15,7 +15,7 @@ public class Client extends BaseEntity {
 
     // 6-digit ID assigned by worker
     @Column(unique = true, nullable = false, length = 6)
-    private String clientIdNumber;
+    private String orgAssignedId;
 
     @Column(nullable = false)
     private String firstName;
@@ -27,9 +27,9 @@ public class Client extends BaseEntity {
     @JoinColumn(name = "primary_worker_id")
     private Employee primaryWorker;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "organization_id", nullable = false)
-    private Organization organization;
+    //@ManyToOne(optional = false)
+    //@JoinColumn(name = "organization_id", nullable = false)
+    //private Organization organization;
 
     // SSDI-specific dates
     @Column(nullable = true)
