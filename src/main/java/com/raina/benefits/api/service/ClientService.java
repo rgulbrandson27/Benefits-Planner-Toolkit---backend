@@ -73,4 +73,9 @@ public class ClientService {
     public boolean clientExists(Long id) {
         return clientRepository.existsById(id);
     }
+
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
+    public boolean orgAssignedIdExists(String orgAssignedId) {
+        return clientRepository.existsByOrgAssignedId(orgAssignedId);
+    }
 }

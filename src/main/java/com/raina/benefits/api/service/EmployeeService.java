@@ -65,6 +65,7 @@ public class EmployeeService {
     }
 
     // Check if employee exists
+    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
     public boolean employeeExists(Long id) {
         return employeeRepository.existsById(id);
     }

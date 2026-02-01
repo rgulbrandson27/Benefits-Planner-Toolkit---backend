@@ -18,7 +18,7 @@ public class ClientControllerTest {
     void shouldCreateClientWithNameIdDate() {
         // Given
         Client client = new Client();
-        client.setClientIdNumber("AAA111");
+        client.setOrgAssignedId("AAA111");
         client.setFirstName("Barbara");
         client.setLastName("Beneficiary");
 
@@ -27,7 +27,7 @@ public class ClientControllerTest {
 
         // Then
         assertNotNull(saved.getId());
-        assertEquals("AAA111", saved.getClientIdNumber());
+        assertEquals("AAA111", saved.getOrgAssignedId());
         assertEquals("Barbara", saved.getFirstName());
         assertEquals("Beneficiary", saved.getLastName());
     }

@@ -20,10 +20,10 @@ public class Organization extends BaseEntity {
     private String abbreviation;
 
     // Relationships - Organization has many employees
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<Employee> employees = new ArrayList<>();
+   // @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    //private List<Employee> employees = new ArrayList<>();
 
     // Relationships - Organization has many clients
-    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
-    private List<Client> clients = new ArrayList<>();
+    //@OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    //private List<Client> clients = new ArrayList<>();
 }
