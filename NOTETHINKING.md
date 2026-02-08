@@ -31,5 +31,24 @@ new Date('2020-03-15').toLocaleDateString('en-US') // "3/15/2020"
 
 CLAUDE: "I genuinely enjoy" working through these problems with you - "
 
+### ChatGPT language to review and organize
 
+Also: why I prefer selector functions over destructuring
+
+This:
+
+const { currentMode, setMode } = useModeStore();
+
+
+subscribes your component to the entire store object, which can cause extra re-renders.
+
+This:
+
+const currentMode = useModeStore(s => s.currentMode);
+const setMode = useModeStore(s => s.setMode);
+
+
+subscribes only to the pieces you need.
+
+Not a huge deal for small apps, but it’s good practice and looks great in a portfolio.
 
