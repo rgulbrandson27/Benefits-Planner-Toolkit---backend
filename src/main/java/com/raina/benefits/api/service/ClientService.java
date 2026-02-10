@@ -1,10 +1,16 @@
 package com.raina.benefits.api.service;
+import com.raina.benefits.api.exception.ClientNotFoundException;
+import com.raina.benefits.api.exception.DuplicateOrgAssignedIdException;
 
 import com.raina.benefits.api.entity.Client;
 import com.raina.benefits.api.entity.Employee;
 import com.raina.benefits.api.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.raina.benefits.api.exception.ClientNotFoundException;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -27,6 +33,11 @@ public class ClientService {
     // Read - Get by ID
     public Optional<Client> getClientById(Long id) {
         return clientRepository.findById(id);
+    }
+
+    public Client getClientByIdOrThrow(Long id) {
+        return clientRepository.findById(id)
+                .orElseThrow(() -> new ClientNotFoundException(id));
     }
 
     // Read - Get by client ID number
@@ -55,27 +66,30 @@ public class ClientService {
 
     // Search by full name
     public List<Client> searchByFullName(String firstName, String lastName) {
-        return clientRepository.findByFirstNameAndLastName(firstName, lastName);
+        return clientRepository.findByFirstNameIgnoreCaseAndLastNameIgnoreCase(firstName, lastName);
     }
 
+    public Client createClient(Client client) {
+        if (clientRepository.existsByOrgAssignedId(client.getOrgAssignedId())) {
+            throw new DuplicateOrgAssignedIdException(client.getOrgAssignedId());
+        }
+        return clientRepository.save(client);
+    }
+
+    public boolean clientExists(Long id) {
+        return clientRepository.existsById(id);
+    }
     // Validation - Check if client ID number exists
-    public boolean clientIdNumberExists(String clientIdNumber) {
-        return clientRepository.existsByOrgAssignedId(clientIdNumber);
+    public boolean orgAssignedIdExists(String orgAssignedId) {
+        return clientRepository.existsByOrgAssignedId(orgAssignedId);
     }
 
     // Delete
     public void deleteClient(Long id) {
+        if (!clientRepository.existsById(id)) {
+            throw new ClientNotFoundException(id);
+        }
         clientRepository.deleteById(id);
     }
 
-    // Check if client exists
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean clientExists(Long id) {
-        return clientRepository.existsById(id);
-    }
-
-    @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    public boolean orgAssignedIdExists(String orgAssignedId) {
-        return clientRepository.existsByOrgAssignedId(orgAssignedId);
-    }
 }

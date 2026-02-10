@@ -26,6 +26,35 @@ DATE FORMATTING
 To format for display later if needed:
 new Date('2020-03-15').toLocaleDateString('en-US') // "3/15/2020"
 
+#### Keep Service Layer HTTP free
+Service throws domain/app exceptions (no HttpStatus, no ResponseStatusException)
+
+ControllerAdvice converts those exceptions into proper HTTP responses (404, 400, etc.)
+
+Controllers stay thin.
+
+#### IDE suggested I "invert" clientExists - however...
+
+#####
+Positive predicates are easier to reason about
+
+Humans reason better about:
+
+exists
+
+isValid
+
+isAuthorized
+
+than about:
+
+doesNotExist
+
+isInvalid
+
+isUnauthorized
+
+Negatives get confusing fast when you stack conditions.
 
 ### TOO FUN TO FORGET:)
 

@@ -31,4 +31,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
 
     // Search by full name
     List<Client> findByFirstNameAndLastName(String firstName, String lastName);
+
+    List<Client> findByFirstNameIgnoreCaseAndLastNameIgnoreCase(String firstName, String lastName);
 }

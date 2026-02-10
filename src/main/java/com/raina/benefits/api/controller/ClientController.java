@@ -32,10 +32,9 @@ public class ClientController {
 
     @GetMapping("/{id}")
     public Client getClientById(@PathVariable Long id) {
-        return clientService.getClientById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
-                        "Client not found"));
+        return clientService.getClientByIdOrThrow(id);
     }
+
 
     // Get client by organization-assigned ID
     @GetMapping("/org-id/{orgAssignedId}")
@@ -79,9 +78,6 @@ public class ClientController {
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteClient(@PathVariable Long id) {
-        if (!clientService.clientExists(id)) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Client not found");
-        }
         clientService.deleteClient(id);
     }
 }
