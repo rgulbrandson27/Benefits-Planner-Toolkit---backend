@@ -1,3 +1,15 @@
+# ---- Secrets / local env ----
+.env
+.env.*
+!.env.example
+
+# ---- OS / misc ----
+.DS_Store
+
+# ---- If you have Spring Boot env overrides ----
+application-local.properties
+application-local.yml
+
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar

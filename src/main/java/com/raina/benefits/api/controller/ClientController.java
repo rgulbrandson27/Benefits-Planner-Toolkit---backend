@@ -14,7 +14,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClientController {
 
-    private final ClientService clientService;  // Changed from ClientRepository
+    private final ClientService clientService;
 
     @PostMapping
     public Client createClient(@RequestBody Client client) {
@@ -35,8 +35,6 @@ public class ClientController {
         return clientService.getClientByIdOrThrow(id);
     }
 
-
-    // Get client by organization-assigned ID
     @GetMapping("/org-id/{orgAssignedId}")
     public Client getClientByOrgAssignedId(@PathVariable String orgAssignedId) {
         return clientService.getClientByOrgAssignedId(orgAssignedId)
@@ -44,19 +42,16 @@ public class ClientController {
                         "Client not found"));
     }
 
-    // Get clients by primary worker ID
     @GetMapping("/primary-worker/{workerId}")
     public List<Client> getClientsByPrimaryWorker(@PathVariable Long workerId) {
         return clientService.getClientsByPrimaryWorkerId(workerId);
     }
 
-    // Search clients by last name
     @GetMapping("/search/last-name")
     public List<Client> searchByLastName(@RequestParam String lastName) {
         return clientService.searchByLastName(lastName);
     }
 
-    // Search clients by full name
     @GetMapping("/search/full-name")
     public List<Client> searchByFullName(
             @RequestParam String firstName,
@@ -64,7 +59,6 @@ public class ClientController {
         return clientService.searchByFullName(firstName, lastName);
     }
 
-    // Update a client
     @PutMapping("/{id}")
     public Client updateClient(@PathVariable Long id, @RequestBody Client client) {
         if (!clientService.clientExists(id)) {
@@ -74,7 +68,6 @@ public class ClientController {
         return clientService.saveClient(client);
     }
 
-    // Delete a client
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteClient(@PathVariable Long id) {

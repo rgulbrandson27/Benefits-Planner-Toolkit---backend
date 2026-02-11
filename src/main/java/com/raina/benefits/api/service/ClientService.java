@@ -40,7 +40,7 @@ public class ClientService {
                 .orElseThrow(() -> new ClientNotFoundException(id));
     }
 
-    // Read - Get by client ID number
+    // Read - Get by client org assigned ID number
     public Optional<Client> getClientByOrgAssignedId(String orgAssignedId) {
         return clientRepository.findByOrgAssignedId(orgAssignedId);
     }

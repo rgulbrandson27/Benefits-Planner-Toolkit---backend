@@ -18,10 +18,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     // Check if client ID number already exists (for validation)
     boolean existsByOrgAssignedId(String clientIdNumber);
 
-    // Find all clients for an organization
-    //List<Client> findByOrganization(Organization organization);
-    //List<Client> findByOrganizationId(Long organizationId);
-
     // Find all clients for a specific primary worker
     List<Client> findByPrimaryWorker(Employee employee);
     List<Client> findByPrimaryWorkerId(Long primaryWorkerId);
@@ -29,8 +25,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
     // Search by last name (case-insensitive, partial match)
     List<Client> findByLastNameContainingIgnoreCase(String lastName);
 
-    // Search by full name
-    List<Client> findByFirstNameAndLastName(String firstName, String lastName);
-
+    // Search by full name (case-insensitive, partial match)
     List<Client> findByFirstNameIgnoreCaseAndLastNameIgnoreCase(String firstName, String lastName);
 }

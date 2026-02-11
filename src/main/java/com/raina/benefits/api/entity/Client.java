@@ -27,10 +27,6 @@ public class Client extends BaseEntity {
     @JoinColumn(name = "primary_worker_id")
     private Employee primaryWorker;
 
-    //@ManyToOne(optional = false)
-    //@JoinColumn(name = "organization_id", nullable = false)
-    //private Organization organization;
-
     // SSDI-specific dates
     @Column(nullable = true)
     private LocalDate onsetDate;
@@ -40,5 +36,9 @@ public class Client extends BaseEntity {
     private LocalDate entitlementDate;
 
     private LocalDate medicareStartDate;
-
 }
+
+//FOR LATER
+//@ManyToOne(optional = false)
+//@JoinColumn(name = "organization_id", nullable = false)
+//private Organization organization;
