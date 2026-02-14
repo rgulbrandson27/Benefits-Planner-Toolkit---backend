@@ -21,7 +21,8 @@ public interface ScenarioRepository extends JpaRepository<Scenario, Long> {
     List<Scenario> findByEmployeeId(Long employeeId);
 
     // Find scenarios by status
-    List<Scenario> findByStatus(String status);
+    List<Scenario> findByStatus(Scenario.ScenarioStatus status);
+
 
     // Find scenarios by client, ordered by most recent first
     List<Scenario> findByClientOrderByCreatedAtDesc(Client client);

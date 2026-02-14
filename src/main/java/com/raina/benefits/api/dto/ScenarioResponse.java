@@ -12,11 +12,9 @@ import java.time.LocalDateTime;
 public class ScenarioResponse {
     private Long id;
     private Long clientId;
+    private Integer scenarioStartYear;
     private String description;
     private String status;
     private LocalDateTime createdDate;
     private LocalDateTime lastModified;
-
-    private WorkIncentivesData timeline;
-    private EarningsData earnings;
 }

@@ -14,8 +14,20 @@ Added new integer field to Scenario entity for chart population
 
 ### TO REMEMBER
 
+##### NULLABLE BOOLEANS
+Don't use them unless you genuinely need a tri-state.
+Set year/months earnings "status" all to false to start with.
+
+
+The nullable = false on the boolean columns just means: "If the row (month) exists in the database, these boolean columns must have a value (true or false), not null."
+
 DATE FORMATTING
 #### I wanted to use MM-DD-YYYY for SQL formatting - but....
+
+When to use each:
+
+Request/Response → Directional DTOs (specific to API endpoint direction)
+DTO → Generic transfer objects used in multiple contexts
 
 ###### YYYY-MM-DD
 ✅ International standard
@@ -26,7 +38,7 @@ DATE FORMATTING
 To format for display later if needed:
 new Date('2020-03-15').toLocaleDateString('en-US') // "3/15/2020"
 
-#### Keep Service Layer HTTP free
+##### Keep Service Layer HTTP free
 Service throws domain/app exceptions (no HttpStatus, no ResponseStatusException)
 
 ControllerAdvice converts those exceptions into proper HTTP responses (404, 400, etc.)

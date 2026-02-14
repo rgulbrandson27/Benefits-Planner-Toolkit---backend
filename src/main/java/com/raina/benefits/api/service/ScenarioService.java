@@ -71,11 +71,6 @@ public class ScenarioService {
         return scenarioRepository.findTop10ByEmployeeIdOrderByCreatedAtDesc(employeeId);
     }
 
-    // Read - Get scenarios by status
-    public List<Scenario> getScenariosByStatus(String status) {
-        return scenarioRepository.findByStatus(status);
-    }
-
     // Delete
     public void deleteScenario(Long id) {
         scenarioRepository.deleteById(id);

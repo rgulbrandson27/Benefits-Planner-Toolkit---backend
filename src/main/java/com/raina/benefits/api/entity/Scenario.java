@@ -3,11 +3,13 @@ package com.raina.benefits.api.entity;
 import lombok.Data;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 @Data
 @Entity
 @Table(name = "scenarios")
-public class Scenario extends BaseEntity{
+
+public class Scenario extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,20 +23,34 @@ public class Scenario extends BaseEntity{
     @JoinColumn(name = "employee_id", nullable = false)
     private Employee employee;
 
-    @Column(nullable = true)
-    private Integer scenarioStartYear; // the first row in the chart of 13 total years listed
+    @Column(nullable = false)
+    private Integer scenarioStartYear;
 
     @Column(length = 500)
     private String description;
 
-    @Column(length = 50)
-    private String status;  // e.g., "DRAFT", "COMPLETED", "ARCHIVED"
+    @Enumerated(EnumType.STRING)
+    private ScenarioStatus status;
 
-    // Stored as JSON
-    @Column(columnDefinition = "TEXT")
-    private String workIncentivesData;
+    public enum ScenarioStatus {
+        DRAFT,
+        COMPLETED,
+        ARCHIVED
+    }
 
-    @Column(columnDefinition = "TEXT")
-    private String earningsData;
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private ScenarioStatus scenario_status = ScenarioStatus.DRAFT;
+
+    @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<MonthlyWorkStatus> monthlyWorkStatuses = new ArrayList<>();
 
 }
+//    // OLD
+//    Stored as JSON
+//    @Column(columnDefinition = "TEXT")
+//    private String workIncentivesData;
+//
+//    @Column(columnDefinition = "TEXT")
+//    private String earningsData;
+

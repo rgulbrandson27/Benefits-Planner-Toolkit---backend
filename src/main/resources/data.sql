@@ -1,15 +1,16 @@
 -- Create Employee - Patricia Planner (TTW benefits counselor)
 INSERT INTO employees (id, first_name, last_name, email, program_type) VALUES
-    (27, 'Patricia', 'Planner', 'patricia.planner@benefitshelp.org', 'TTW');
+    (27, 'Patricia', 'Planner', 'patricia.planner@ssabenefitshelp.org', 'TTW');
 
--- Create two Beneficiary Clients
+-- Create two Beneficiaries
+-- ----change to "org-assigned-id"
 INSERT INTO clients (id, client_id_number, first_name, last_name, primary_worker_id, onset_date, application_date, entitlement_date, medicare_start_date) VALUES
-    (1, 'AAA111', 'Betty', 'Beneficiary1', 27, '2018-10-19', '2019-11-10', '2018-11-01', '2020-11-01'),
-    (2, 'BBB222', 'Bernard', 'Beneficiary2', 27, '2008-06-22', '2008-06-30', '2008-12-01', '2010-12-01');
+    (1,'AAA111', 'Betty', 'Beneficiary1', 27, '2023-10-19', '2024-11-10', '2023-11-01', '2025-11-01'),
+    (2, 'BBB222', 'Bernard', 'Beneficiary2', 27, '2008-06-22', '2008-07-30', '2008-12-01', '2010-12-01');
 
 -- Betty - Scenario 1
 INSERT INTO scenarios (client_id, employee_id, description, status, work_incentives_data, earnings_data, created_at, updated_at) VALUES
-    (1, 27, 'Resuming worth with former employer, working 20 hours/week earning $16/hour.', 'ACTIVE',
+    (1, 27, 'Resumed working with former employer working 20 hours/week at $16.00/hour for earnings of $1,686.00.', 'ACTIVE',
      '{"twpMonthsUsed": 0, "epeStatus": "NOT_STARTED", "benefitAmount": 1425.00, "sgaThreshold": 1550.00}',
      '{"monthlyGross": 600.00, "irweDeductions": 0, "countableIncome": 600.00, "projectedAnnual": 7200.00}',
      NOW(), NOW());

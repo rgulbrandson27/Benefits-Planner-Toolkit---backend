@@ -9,9 +9,7 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class ScenarioRequest {
     private Long clientId;
+    private Integer scenarioStartYear;  // Added: from your Scenario entity
     private String description;
-    private String status;
-
-    private WorkIncentivesData timeline;    // Timeline tracking
-    private EarningsData earnings;          // Earnings information
+    private String status;  // "DRAFT", "COMPLETED", "ARCHIVED"
 }
