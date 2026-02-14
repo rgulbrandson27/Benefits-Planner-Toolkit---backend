@@ -29,16 +29,22 @@
     <properties>
         <java.version>17</java.version>
     </properties>
+
+<!--    /////////////////////////////-->
+
     <dependencies>
+<!--        this first one is outdated becaus a newer string boot version needs to be installed,-->
+<!--        however, my mac will not support it because it is an older mac-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc</artifactId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <!-- NO SCOPE HERE -->
         </dependency>
-
+        <!-- DELETE spring-boot-starter-webmvc -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
@@ -52,14 +58,10 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa-test</artifactId>
+            <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webmvc-test</artifactId>
-            <scope>test</scope>
-        </dependency>
+        <!-- DELETE spring-boot-starter-webmvc-test -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -1,5 +1,5 @@
 package com.raina.benefits.api.service;
-import com.raina.benefits.api.exception.ClientNotFoundException;
+import com.raina.benefits.api.exception.ResourceNotFoundException;
 import com.raina.benefits.api.exception.DuplicateOrgAssignedIdException;
 
 import com.raina.benefits.api.entity.Client;
@@ -7,10 +7,6 @@ import com.raina.benefits.api.entity.Employee;
 import com.raina.benefits.api.repository.ClientRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.raina.benefits.api.exception.ClientNotFoundException;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -37,7 +33,7 @@ public class ClientService {
 
     public Client getClientByIdOrThrow(Long id) {
         return clientRepository.findById(id)
-                .orElseThrow(() -> new ClientNotFoundException(id));
+                .orElseThrow(() -> new ResourceNotFoundException("Client not found with id: " + id));
     }
 
     // Read - Get by client org assigned ID number
@@ -87,7 +83,7 @@ public class ClientService {
     // Delete
     public void deleteClient(Long id) {
         if (!clientRepository.existsById(id)) {
-            throw new ClientNotFoundException(id);
+            throw new ResourceNotFoundException("Client not found with id: " + id);
         }
         clientRepository.deleteById(id);
     }

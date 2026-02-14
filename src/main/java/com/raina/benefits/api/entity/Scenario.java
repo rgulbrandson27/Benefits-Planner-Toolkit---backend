@@ -1,14 +1,16 @@
 package com.raina.benefits.api.entity;
 
-import lombok.Data;
+import lombok.*;
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
+@Builder  // <-- Need this!
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
-@Table(name = "scenarios")
-
 public class Scenario extends BaseEntity {
 
     @Id
@@ -29,9 +31,6 @@ public class Scenario extends BaseEntity {
     @Column(length = 500)
     private String description;
 
-    @Enumerated(EnumType.STRING)
-    private ScenarioStatus status;
-
     public enum ScenarioStatus {
         DRAFT,
         COMPLETED,
@@ -40,11 +39,7 @@ public class Scenario extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private ScenarioStatus scenario_status = ScenarioStatus.DRAFT;
-
-    @OneToMany(mappedBy = "scenario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MonthlyWorkStatus> monthlyWorkStatuses = new ArrayList<>();
-
+    private ScenarioStatus status = ScenarioStatus.DRAFT;
 }
 //    // OLD
 //    Stored as JSON
