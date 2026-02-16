@@ -18,16 +18,22 @@ Added new integer field to Scenario entity for chart population
 Don't use them unless you genuinely need a tri-state.
 Set year/months earnings "status" all to false to start with.
 
-
 The nullable = false on the boolean columns just means: "If the row (month) exists in the database, these boolean columns must have a value (true or false), not null."
 
 DATE FORMATTING
-#### I wanted to use MM-DD-YYYY for SQL formatting - but....
+##### I wanted to use MM-DD-YYYY for SQL formatting - but....
 
 When to use each:
 
 Request/Response → Directional DTOs (specific to API endpoint direction)
 DTO → Generic transfer objects used in multiple contexts
+
+##### NOTE ON APPLICATION PROPERTIES
+Data Definition Language (DDL):
+**spring.jpa.hibernate.ddl-auto**
+
+- **`update`** (use for development): Creates tables if they don't exist, updates them if you change entities, **keeps your data between app restarts**
+- **`create-drop`** (use for clean slate): Creates tables on startup, **deletes ALL tables when app stops** - useful when you want to start fresh with new schema
 
 ###### YYYY-MM-DD
 ✅ International standard

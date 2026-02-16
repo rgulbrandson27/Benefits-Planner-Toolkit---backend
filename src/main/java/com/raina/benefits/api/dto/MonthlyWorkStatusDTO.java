@@ -26,4 +26,7 @@ public class MonthlyWorkStatusDTO {
 
     // Medicare status
     private String medicareStatus;    // "MEDICARE_BEGAN", "MEDICARE_BEGINS", etc. or null
+
+    // Benefit status
+    private String benefitStatus;     // "BENEFIT_SUSPENDED", "BENEFIT_TERMINATED", "BENEFIT_RESTARTED" or null
 }

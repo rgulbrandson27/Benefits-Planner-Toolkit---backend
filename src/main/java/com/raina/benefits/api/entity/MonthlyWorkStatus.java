@@ -1,27 +1,23 @@
 package com.raina.benefits.api.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
+import lombok.*;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 
+@EqualsAndHashCode(callSuper = true) //Lombok annotation that handles how equality checking works when your entity extends another class.
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "monthly_work_status",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"scenario_id", "year", "month"})
-)
+@Table(name = "monthly_work_status")
 public class MonthlyWorkStatus extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "scenario_id", nullable = false)
     private Scenario scenario;
 
@@ -29,15 +25,10 @@ public class MonthlyWorkStatus extends BaseEntity {
     private Integer year;
 
     @Column(nullable = false)
-    private Integer month;  // 1-12
+    private Integer month;
 
-    //For later
-    @Column(precision = 10, scale = 2)
+    // Earnings
     private BigDecimal earningsAmount;
-
-    @Enumerated(EnumType.STRING)
-    @Column(length = 50)
-    private EarningsCategory earningsCategory;
 
     public enum EarningsCategory {
         BELOW_TWP,
@@ -45,24 +36,32 @@ public class MonthlyWorkStatus extends BaseEntity {
         ABOVE_SGA
     }
 
-    @Column
-    private Integer twpMonthNumber;
-
-    @Column
-    private Integer epeMonthNumber;
-
-    @Column
-    private Integer graceMonthNumber;
     @Enumerated(EnumType.STRING)
+    private EarningsCategory earningsCategory;
 
-    @Column(length = 50)
-    private MedicareStatus medicareStatus;  // nullable, defaults to null
+    // Work incentive month numbers
+    private Integer twpMonthNumber;   // 1-9 or null
+    private Integer epeMonthNumber;   // 1-36 or null
+    private Integer graceMonthNumber; // 1-3 or null
 
+    // Medicare status
     public enum MedicareStatus {
         MEDICARE_BEGAN,
         MEDICARE_BEGINS,
-        MEDICARE_ENDS,
         EPMC_BEGINS,
         EPMC_ENDS
     }
+
+    @Enumerated(EnumType.STRING)
+    private MedicareStatus medicareStatus;
+
+    // Benefit status
+    public enum BenefitStatus {
+        BENEFIT_SUSPENDED,
+        BENEFIT_TERMINATED,
+        BENEFIT_RESTARTED
+    }
+
+    @Enumerated(EnumType.STRING)
+    private BenefitStatus benefitStatus;
 }
