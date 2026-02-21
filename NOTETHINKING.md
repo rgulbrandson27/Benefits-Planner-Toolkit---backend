@@ -10,8 +10,6 @@ Added new integer field to Scenario entity for chart population
 ### TO CONSIDER/ADDRESS
 -Onset, entitlement, etc. may not fall within years listed - data there, just doesn't display - no action needed?
 
--Start year - may need to parse or change both to int
-
 ### TO REMEMBER
 
 ##### NULLABLE BOOLEANS
@@ -27,6 +25,12 @@ When to use each:
 
 Request/Response → Directional DTOs (specific to API endpoint direction)
 DTO → Generic transfer objects used in multiple contexts
+
+##### GIT COMMITS
+Convention: Use present tense. 
+"This commit will Add benefit_status field" ✓
+It describes what the commit does when applied, not what you did. 
+Treats commits like instructions/patches.
 
 ##### NOTE ON APPLICATION PROPERTIES
 Data Definition Language (DDL):
@@ -76,7 +80,13 @@ Negatives get confusing fast when you stack conditions.
 
 ### TOO FUN TO FORGET:)
 
-CLAUDE: "I genuinely enjoy" working through these problems with you - "
+CLAUDE somehow is able to "genuinely enjoy" things.
+
+Typography is a centuries-old discipline. When computers came along, printing terms from the 1800s were brought into digital typography
+the vocabulary with them.
+Examples: kerning, tracking, leading (pronounced 'ledding'), baseline, ascender, descender
+...although "no one is melting lead in their VS code window" 
+It used to be that metal was placed between lines for vertical spacing.  
 
 ### ChatGPT language to review and organize
 
