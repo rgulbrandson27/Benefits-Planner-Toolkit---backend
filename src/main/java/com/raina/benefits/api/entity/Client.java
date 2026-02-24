@@ -14,13 +14,13 @@ public class Client extends BaseEntity {
     private Long id;
 
     // 6-digit ID assigned by worker
-    @Column(unique = true, nullable = false, length = 6)
+    @Column(unique = true, nullable = true, length = 6)
     private String orgAssignedId;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String firstName;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String lastName;
 
     @ManyToOne(optional = true)

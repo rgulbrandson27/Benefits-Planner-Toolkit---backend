@@ -28,8 +28,9 @@ public class Employee extends BaseEntity {
     @Column(nullable = false)
     private ProgramType programType;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "organization_id", nullable = false)
+//    changed to nullable temporarily for testing
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "organization_id", nullable = true)
     private Organization organization;
 
     // Relationship - Employee can be primary worker for many clients
