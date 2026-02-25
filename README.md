@@ -2,7 +2,8 @@
 
 RESTful API built with Spring Boot for SSDI work incentives planning and benefits calculations.
 
-**Frontend Repository:** https://github.com/yourname/benefits-planner-frontend
+<img src="screenshots/tracking-table.png" alt="TWP Tracking Table" width="700" />
+*Frontend user interface showing marked Trial Work Period months to be sent to database (styling in progress).*
 
 ## Tech Stack
 - Java 17
