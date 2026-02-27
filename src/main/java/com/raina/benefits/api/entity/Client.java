@@ -1,5 +1,6 @@
 package com.raina.benefits.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import jakarta.persistence.*;
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ public class Client extends BaseEntity {
     @Column(nullable = true)
     private String lastName;
 
+    @JsonBackReference
     @ManyToOne(optional = true)
     @JoinColumn(name = "primary_worker_id")
     private Employee primaryWorker;

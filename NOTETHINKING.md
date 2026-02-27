@@ -2,27 +2,32 @@
 ### TO REVERSE
 Commented out 'ORGANIZATION' entity key from client and employee - simplicity purposes - temp
 
-### TO DOCUMENT
-Added new integer field to Scenario entity for chart population
-
-### TO-DO
-
 ### TO CONSIDER/ADDRESS
 -Onset, entitlement, etc. may not fall within years listed - data there, just doesn't display - no action needed?
 
 ### TO REMEMBER
 
-##### NULLABLE BOOLEANS
+##### Watch for infinite loops/circular references.  
+Example: Clients have a primary worker, but employees have many clients.  
+Use @JsonManagedReference and @JsonBackReference
+
+##### Nullable Booleans
 Don't use them unless you genuinely need a tri-state.
 Set year/months earnings "status" all to false to start with.
-
 The nullable = false on the boolean columns just means: "If the row (month) exists in the database, these boolean columns must have a value (true or false), not null."
 
-DATE FORMATTING
-##### I wanted to use MM-DD-YYYY for SQL formatting - but....
+##### DATE FORMATTING
+I wanted to use MM-DD-YYYY for SQL formatting - but....
+YYYY-MM-DD
+✅ International standard
+✅ Unambiguous worldwide (no confusion about which number is month vs day)
+✅ Sorts correctly (2025-01-15 comes before 2025-02-01)
+✅ PostgreSQL expects this format
+✅ Java LocalDate.parse() works without extra formatters
+To format for display later if needed:
+new Date('2020-03-15').toLocaleDateString('en-US') // "3/15/2020"
 
-When to use each:
-
+##### Two Types of DTOs
 Request/Response → Directional DTOs (specific to API endpoint direction)
 DTO → Generic transfer objects used in multiple contexts
 
@@ -32,55 +37,33 @@ Convention: Use present tense.
 It describes what the commit does when applied, not what you did. 
 Treats commits like instructions/patches.
 
-##### NOTE ON APPLICATION PROPERTIES
+##### Note on application.properties
 Data Definition Language (DDL):
 **spring.jpa.hibernate.ddl-auto**
-
 - **`update`** (use for development): Creates tables if they don't exist, updates them if you change entities, **keeps your data between app restarts**
 - **`create-drop`** (use for clean slate): Creates tables on startup, **deletes ALL tables when app stops** - useful when you want to start fresh with new schema
 
-###### YYYY-MM-DD
-✅ International standard
-✅ Unambiguous worldwide (no confusion about which number is month vs day)
-✅ Sorts correctly (2025-01-15 comes before 2025-02-01)
-✅ PostgreSQL expects this format
-✅ Java LocalDate.parse() works without extra formatters
-To format for display later if needed:
-new Date('2020-03-15').toLocaleDateString('en-US') // "3/15/2020"
-
 ##### Keep Service Layer HTTP free
 Service throws domain/app exceptions (no HttpStatus, no ResponseStatusException)
-
 ControllerAdvice converts those exceptions into proper HTTP responses (404, 400, etc.)
-
 Controllers stay thin.
 
-#### IDE suggested I "invert" clientExists - however...
-
-#####
+##### IDE suggested I "invert" clientExists - however...
 Positive predicates are easier to reason about
-
 Humans reason better about:
-
 exists
-
 isValid
-
 isAuthorized
-
 than about:
-
 doesNotExist
-
 isInvalid
-
 isUnauthorized
-
 Negatives get confusing fast when you stack conditions.
 
 ### TOO FUN TO FORGET:)
 
-CLAUDE somehow is able to "genuinely enjoy" things.
+Claude: I "genuinely enjoy"...
+Claude:  "You're right, I confused myself."
 
 Typography is a centuries-old discipline. When computers came along, printing terms from the 1800s were brought into digital typography
 the vocabulary with them.
@@ -88,24 +71,15 @@ Examples: kerning, tracking, leading (pronounced 'ledding'), baseline, ascender,
 ...although "no one is melting lead in their VS code window" 
 It used to be that metal was placed between lines for vertical spacing.  
 
-### ChatGPT language to review and organize
-
+### TO REVIEW
+Claude - 
 Also: why I prefer selector functions over destructuring
-
 This:
-
 const { currentMode, setMode } = useModeStore();
-
-
 subscribes your component to the entire store object, which can cause extra re-renders.
-
 This:
-
 const currentMode = useModeStore(s => s.currentMode);
 const setMode = useModeStore(s => s.setMode);
-
-
 subscribes only to the pieces you need.
-
 Not a huge deal for small apps, but it’s good practice and looks great in a portfolio.
 

@@ -1,5 +1,6 @@
 package com.raina.benefits.api.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -34,6 +35,7 @@ public class Employee extends BaseEntity {
     private Organization organization;
 
     // Relationship - Employee can be primary worker for many clients
+    @JsonManagedReference
     @OneToMany(mappedBy = "primaryWorker")
     private List<Client> assignedClients = new ArrayList<>();
 
