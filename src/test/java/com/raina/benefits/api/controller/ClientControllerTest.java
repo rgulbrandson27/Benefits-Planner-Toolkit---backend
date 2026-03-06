@@ -7,10 +7,12 @@ import com.raina.benefits.api.repository.EmployeeRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
+@Transactional
 public class ClientControllerTest {
 
     @Autowired
@@ -53,7 +55,7 @@ public class ClientControllerTest {
 
         // Then
         assertNotNull(updated.getPrimaryWorker());
-        assertEquals(27L, updated.getPrimaryWorker().getId());
+        assertEquals(27, updated.getPrimaryWorker().getId());
     }
 
 }
